@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>sample</title>
+    <!-- <script src="./../node_modules/aframe-extras/dist/aframe-extras.min.js"></script> -->
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
+
+    <script src="./camera.js"></script>
+    <script src="./syncuser.js"></script>
+    <!-- <script src="./solve.js"></script>
+    <script src="./solve2.js"></script>
+    <script src="./cubeTouch.js"></script>
+    <script src="./cubemrotate.js"></script>
+    <script src="./colorinput.js"></script>
+    <script src="./modelLoad.js"></script>
+    <script src="./meter.js"></script>
+    <script src="./motionList.js"></script> -->
+
+    <link rel="stylesheet" href="./style.css">
+  </head>
+
+  <script type="text/javascript">
+    AFRAME.registerComponent('camera-view', camera())
+    AFRAME.registerComponent('sync-user', syncuser())
+    // AFRAME.registerComponent('press-key-board', presskeyboard())
+    // AFRAME.registerComponent('cube-rotate', cubemrotate())
+    // AFRAME.registerComponent('cube-mode', cubemode())
+    // AFRAME.registerComponent('color-set', colorinput())
+    // AFRAME.registerComponent('model-load',modelLoad())
+
+    let count = 0
+  </script>
+
+  <body oncontextmenu="return false;" >
+    <div id="main-display" class="main-display display">
+      <a-scene 
+        id="scene"
+        loading-screen="enabled: false"
+        renderer="sortObjects: true"
+        xr-mode-ui="enabled: false"
+        keyboard-shortcuts="enterVR: false; exitVR: false"
+        device-orientation-permission-ui="enabled: false"
+        embedded 
+        press-key-board cube-mode model-load
+      >
+      <a-assets>
+        <a-asset-item id="model_hand"   src="./model/sub-hand.glb"></a-asset-item>
+        <a-asset-item id="model_cube_full" src="./cube-full.glb"></a-asset-item>
+      </a-assets>
+
+      
+      <a-sky id="sky" class="clickable sky" material="visible: false;"></a-sky>
+
+      <a-entity id="camera">
+        <a-camera 
+          id="camera2"
+          look-controls-enabled="false"
+          wasd-controls-enabled="false"
+          _sync-user="pos: camera2; rot: camera; Npos: camera2; Nrot: camera"
+          position="0 0 10"
+          fov="60"
+          camera-view="Viewpoint: true; scene: scene;
+            camera: camera; camera2: camera2"
+          cube-rotate="ray: #view"
+          color-set="ray: #view">
+          <a-entity
+            id="view"
+            cursor="rayOrigin: mouse;"
+            raycaster="objects: .clickable; direction:0 0 -1">
+          </a-entity>
+        </a-camera>
+      </a-entity>
+      
+      <a-entity id="full_cube" class="cube" gltf-model="#model_cube_full"></a-entity>
+    </div>
+    
+    <div id="main-display2" class="main-display display2">
+      <a-scene 
+        id="scene2"
+        loading-screen="enabled: false"
+        renderer="sortObjects: true"
+        xr-mode-ui="enabled: false"
+        keyboard-shortcuts="enterVR: false; exitVR: false"
+        device-orientation-permission-ui="enabled: false"
+        embedded 
+        press-key-board cube-mode model-load
+      >
+      <a-assets>
+        <a-asset-item id="model_hand2"   src="./model/sub-hand.glb"></a-asset-item>
+        <a-asset-item id="model_cube_full2" src="./cube-full.glb"></a-asset-item>
+      </a-assets>
+
+      <a-sky id="sky2" class="clickable sky" material="visible: false;"></a-sky>
+
+      <a-entity id="camera-2">
+        <a-camera 
+          id="camera2-2"
+          look-controls-enabled="false"
+          wasd-controls-enabled="false"
+          _sync-user="pos: camera2; rot: camera; Npos: camera2; Nrot: camera"
+          position="0 0 10"
+          fov="60"
+          camera-view="Viewpoint: true; scene: scene2;
+            camera: camera-2; camera2: camera2-2"
+          cube-rotate="ray: #view"
+          color-set="ray: #view">
+          <a-entity
+            id="view"
+            cursor="rayOrigin: mouse;"
+            raycaster="objects: .clickable; direction:0 0 -1">
+          </a-entity>
+        </a-camera>
+      </a-entity>
+      
+      <a-entity id="full_cube2" class="cube" gltf-model="#model_cube_full2"></a-entity>
+    </div>
+    
+    <div id="main-display3" class="main-display display3">
+      <a-scene 
+        id="scene3"
+        loading-screen="enabled: false"
+        renderer="sortObjects: true"
+        xr-mode-ui="enabled: false"
+        keyboard-shortcuts="enterVR: false; exitVR: false"
+        device-orientation-permission-ui="enabled: false"
+        embedded 
+        press-key-board cube-mode model-load
+      >
+      <a-assets>
+        <a-asset-item id="model_hand3"   src="./model/sub-hand.glb"></a-asset-item>
+        <a-asset-item id="model_cube_full3" src="./cube-full.glb"></a-asset-item>
+      </a-assets>
+
+      <a-sky id="sky3" class="clickable sky" material="visible: false;"></a-sky>
+
+      <a-entity id="camera-3">
+        <a-camera 
+          id="camera2-3"
+          look-controls-enabled="false"
+          wasd-controls-enabled="false"
+          _sync-user="pos: camera3; rot: camera; Npos: camera3; Nrot: camera"
+          position="0 0 10"
+          fov="60"
+          camera-view="Viewpoint: true; scene: scene3;
+            camera: camera-3; camera2: camera2-3"
+          cube-rotate="ray: #view"
+          color-set="ray: #view">
+          <a-entity
+            id="view"
+            cursor="rayOrigin: mouse;"
+            raycaster="objects: .clickable; direction:0 0 -1">
+          </a-entity>
+        </a-camera>
+      </a-entity>
+      
+      <a-entity id="full_cube3" class="cube" gltf-model="#model_cube_full3"></a-entity>
+    </div>
+    
+    <div id="main-display4" class="main-display display4">
+      <a-scene 
+        id="scene4"
+        loading-screen="enabled: false"
+        renderer="sortObjects: true"
+        xr-mode-ui="enabled: false"
+        keyboard-shortcuts="enterVR: false; exitVR: false"
+        device-orientation-permission-ui="enabled: false"
+        embedded 
+        press-key-board cube-mode model-load
+      >
+      <a-assets>
+        <a-asset-item id="model_hand4"   src="./model/sub-hand.glb"></a-asset-item>
+        <a-asset-item id="model_cube_full4" src="./cube-full.glb"></a-asset-item>
+      </a-assets>
+
+      <a-sky id="sky4" class="clickable sky" material="visible: false;"></a-sky>
+
+      <a-entity id="camera-4">
+        <a-camera 
+          id="camera2-4"
+          look-controls-enabled="false"
+          wasd-controls-enabled="false"
+          _sync-user="pos: camera4; rot: camera; Npos: camera4; Nrot: camera"
+          position="0 0 10"
+          fov="60"
+          camera-view="Viewpoint: true; scene: scene4;
+            camera: camera-4; camera2: camera2-4"
+          cube-rotate="ray: #view"
+          color-set="ray: #view">
+          <a-entity
+            id="view"
+            cursor="rayOrigin: mouse;"
+            raycaster="objects: .clickable; direction:0 0 -1">
+          </a-entity>
+        </a-camera>
+      </a-entity>
+      
+      <a-entity id="full_cube4" class="cube" gltf-model="#model_cube_full4"></a-entity>
+    </div>
+    
+  </body >
+</html>
+
+
+    <!-- <iframe id="iframe" class="un-pointer-events" src="./index2.html" width="50vmin" height="50vmin"
+    ></iframe> -->

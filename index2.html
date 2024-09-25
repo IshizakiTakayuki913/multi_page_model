@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>sample2</title>
+    
+    <!-- <script src="./../node_modules2/aframe/dist/aframe-v1.6.0.min.js"></script> -->
+    <!-- <script src="./../node_modules/aframe-extras/dist/aframe-extras.min.js"></script> -->
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
+
+    <!-- <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      console.log(window.dataLayer)
+      gtag('js', new Date());
+      gtag('config', 'G-Y3XZ7NZFCZ');
+    </script> -->
+    
+    <!-- <script src="./solve.js"></script> -->
+    <!-- <script src="./solve2.js"></script> -->
+    <script src="./camera.js"></script>
+    <!-- <script src="./cubeTouch.js"></script> -->
+    <!-- <script src="./cubemrotate.js"></script> -->
+    <!-- <script src="./colorinput.js"></script> -->
+    <!-- <script src="./syncuser.js"></script> -->
+    <!-- <script src="./modelLoad.js"></script> -->
+    <!-- <script src="./meter.js"></script> -->
+    <!-- <script src="./motionList.js"></script> -->
+
+    <link rel="stylesheet" href="./style.css">
+  </head>
+
+  <script type="text/javascript">
+    // AFRAME.registerComponent('press-key-board', presskeyboard())
+    AFRAME.registerComponent('camera-view', camera())
+    // AFRAME.registerComponent('cube-rotate', cubemrotate())
+    // AFRAME.registerComponent('cube-mode', cubemode())
+    // AFRAME.registerComponent('color-set', colorinput())
+    // AFRAME.registerComponent('sync-user', syncuser())
+    // AFRAME.registerComponent('model-load',modelLoad())
+
+    let count = 0
+  </script>
+
+  <body oncontextmenu="return false;" >
+    <div id="main-display2">
+      <a-scene id="scene"
+        loading-screen="enabled: false"
+        renderer="sortObjects: true"
+        xr-mode-ui="enabled: false"
+        keyboard-shortcuts="enterVR: false; exitVR: false"
+        device-orientation-permission-ui="enabled: false"
+        embedded 
+        press-key-board cube-mode model-load
+      >
+      <a-assets >
+        <!-- <a-asset-item id="model_hand"   src="./model/sub-hand.glb"></a-asset-item> -->
+        <!-- <a-asset-item id="model_corner" src="./model/corner.glb"></a-asset-item>
+        <a-asset-item id="model_edge"   src="./model/edge.glb"></a-asset-item>
+        <a-asset-item id="model_center" src="./model/center.glb"></a-asset-item> -->
+
+        <!-- <a-asset-item id="model_frame_edge" src="./model/frame-edge.glb"></a-asset-item>
+        <a-asset-item id="model_frame_corner" src="./model/frame-corner.glb"></a-asset-item>
+        <a-asset-item id="model_frame_center" src="./model/frame-center.glb"></a-asset-item> -->
+
+        <!-- <a-asset-item id="model_run" src="./model/normal-box.glb"></a-asset-item> -->
+        <a-asset-item id="model_cube_full" src="./cube-full.glb"></a-asset-item>
+
+        <!-- <a-mixin id="m_ce" gltf-model="#model_center"></a-mixin>
+        <a-mixin id="m_e" gltf-model="#model_edge"></a-mixin>
+        <a-mixin id="m_c" gltf-model="#model_corner"></a-mixin> -->
+        <a-mixin id="m_normal" scale="1 1 1"></a-mixin>
+        <a-mixin id="m_hand"  gltf-model="#model_hand"
+          animation-mixer="clip: Idole; loop: repeat" shadow visible="false"></a-mixin>
+        
+        <a-mixin id="m_cube"  gltf-model="#model_cube_full" geometry animation-mixer></a-mixin>
+
+        <!-- <a-mixin id="m_f_e"  gltf-model="#model_frame_edge"></a-mixin>
+        <a-mixin id="m_f_c"  gltf-model="#model_frame_corner"></a-mixin> -->
+      </a-assets>
+
+
+      <a-entity id="root" position="0 0 0" rotation="0 0 0" visible="false">
+
+        <a-entity id="frame" class="">
+        </a-entity>
+      </a-entity>
+
+      <a-sky id="sky" class="clickable sky" material="visible: false;"></a-sky>
+      <!-- color: #F0F; transparent: true; opctiy: 0; -->
+
+      <a-entity id="camera">
+        <a-camera 
+          id="camera2"
+          look-controls-enabled="false"
+          wasd-controls-enabled="false"
+          _sync-user="pos: camera2; rot: camera; Npos: camera2; Nrot: camera"
+          position="0 0 10"
+          fov="60"
+          camera-view="rayCube: #touch-cube"
+          cube-rotate="ray: #view"
+          color-set="ray: #view">
+          <a-entity
+            id="view"
+            cursor="rayOrigin: mouse;"
+            raycaster="objects: .clickable; direction:0 0 -1">
+          </a-entity>
+        </a-camera>
+      </a-entity>
+      
+      <a-entity id="full_cube" class="cube" gltf-model="#model_cube_full"></a-entity>
+    </div>
+  </body >
+</html>
