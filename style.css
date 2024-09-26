@@ -23,25 +23,25 @@ body {
 	width: 50%;
 }
 
-.display {
+.display-1 {
 	background: rgb(132, 0, 0);
 	top: 0;
 	left: 0;
 }
 
-.display2 {
+.display-2 {
 	background: rgb(24, 132, 0);
 	bottom: 0;
 	left: 0;
 }
 
-.display3 {
+.display-3 {
 	background: rgb(0, 18, 132);
 	top: 0;
 	right: 0;
 }
 
-.display4 {
+.display-4 {
 	background: rgb(132, 0, 119);
 	bottom: 0;
 	right: 0;

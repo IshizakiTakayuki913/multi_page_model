@@ -9,14 +9,14 @@
 
     <script src="./camera.js"></script>
     <script src="./syncuser.js"></script>
-    <!-- <script src="./solve.js"></script>
-    <script src="./solve2.js"></script>
+    <script src="./solve.js"></script>
+    <script src="./modelLoad.js"></script>
+    <script src="./motionList.js"></script>
+    <!-- <script src="./solve2.js"></script>
     <script src="./cubeTouch.js"></script>
     <script src="./cubemrotate.js"></script>
     <script src="./colorinput.js"></script>
-    <script src="./modelLoad.js"></script>
-    <script src="./meter.js"></script>
-    <script src="./motionList.js"></script> -->
+    <script src="./meter.js"></script> -->
 
     <link rel="stylesheet" href="./style.css">
   </head>
@@ -24,45 +24,60 @@
   <script type="text/javascript">
     AFRAME.registerComponent('camera-view', camera())
     AFRAME.registerComponent('sync-user', syncuser())
+    AFRAME.registerComponent('model-load',modelLoad())
     // AFRAME.registerComponent('press-key-board', presskeyboard())
     // AFRAME.registerComponent('cube-rotate', cubemrotate())
     // AFRAME.registerComponent('cube-mode', cubemode())
     // AFRAME.registerComponent('color-set', colorinput())
-    // AFRAME.registerComponent('model-load',modelLoad())
 
     let count = 0
   </script>
 
   <body oncontextmenu="return false;" >
-    <div id="main-display" class="main-display display">
+    <div id="main-display" class="main-display display-1">
       <a-scene 
-        id="scene"
+        id="scene-1"
         loading-screen="enabled: false"
         renderer="sortObjects: true"
         xr-mode-ui="enabled: false"
         keyboard-shortcuts="enterVR: false; exitVR: false"
         device-orientation-permission-ui="enabled: false"
         embedded 
-        press-key-board cube-mode model-load
+        press-key-board cube-mode
+        model-load = "modelType: 0"
       >
+
       <a-assets>
-        <a-asset-item id="model_hand"   src="./model/sub-hand.glb"></a-asset-item>
-        <a-asset-item id="model_cube_full" src="./cube-full.glb"></a-asset-item>
+        <a-asset-item id="model_hand" src="./model/sub-hand.glb"></a-asset-item>
+
+        <a-asset-item id="model_frame_edge" src="./model/frame-edge.glb"></a-asset-item>
+        <a-asset-item id="model_frame_corner" src="./model/frame-corner.glb"></a-asset-item>
+        <a-asset-item id="model_frame_center" src="./model/frame-center.glb"></a-asset-item>
+
+        <a-asset-item id="model_cube_full" src="./model/cube-full.glb"></a-asset-item>
+
+        <a-mixin id="m_normal" scale="1 1 1"></a-mixin>
+        <a-mixin id="m_hand" gltf-model="#model_hand" animation-mixer="clip: Idole; loop: repeat" shadow="" _visible="false"></a-mixin>
+        
+        <a-mixin id="m_cube" gltf-model="#model_cube_full" geometry="" animation-mixer=""></a-mixin>
+
+        <a-mixin id="m_f_e" gltf-model="#model_frame_edge"></a-mixin>
+        <a-mixin id="m_f_c" gltf-model="#model_frame_corner"></a-mixin>
       </a-assets>
 
-      
-      <a-sky id="sky" class="clickable sky" material="visible: false;"></a-sky>
-
-      <a-entity id="camera">
+      <a-entity class="root" position="0 0 0" rotation="0 0 0" visible="false">
+        <a-entity class="frame"></a-entity>
+      </a-entity>
+       
+      <a-entity id="camera-1">
         <a-camera 
-          id="camera2"
+          id="camera2-1"
           look-controls-enabled="false"
           wasd-controls-enabled="false"
-          _sync-user="pos: camera2; rot: camera; Npos: camera2; Nrot: camera"
           position="0 0 10"
           fov="60"
-          camera-view="Viewpoint: true; scene: scene;
-            camera: camera; camera2: camera2"
+          camera-view="Viewpoint: true; scene: scene-1;
+            camera: camera-1; camera2: camera2-1"
           cube-rotate="ray: #view"
           color-set="ray: #view">
           <a-entity
@@ -72,37 +87,50 @@
           </a-entity>
         </a-camera>
       </a-entity>
-      
-      <a-entity id="full_cube" class="cube" gltf-model="#model_cube_full"></a-entity>
     </div>
-    
-    <div id="main-display2" class="main-display display2">
+    <div id="main-display" class="main-display display-2">
       <a-scene 
-        id="scene2"
+        id="scene-2"
         loading-screen="enabled: false"
         renderer="sortObjects: true"
         xr-mode-ui="enabled: false"
         keyboard-shortcuts="enterVR: false; exitVR: false"
         device-orientation-permission-ui="enabled: false"
         embedded 
-        press-key-board cube-mode model-load
+        press-key-board cube-mode
+        model-load = "modelType: 1"
       >
+
       <a-assets>
-        <a-asset-item id="model_hand2"   src="./model/sub-hand.glb"></a-asset-item>
-        <a-asset-item id="model_cube_full2" src="./cube-full.glb"></a-asset-item>
+        <a-asset-item id="model_hand" src="./model/sub-hand.glb"></a-asset-item>
+
+        <a-asset-item id="model_frame_edge" src="./model/frame-edge.glb"></a-asset-item>
+        <a-asset-item id="model_frame_corner" src="./model/frame-corner.glb"></a-asset-item>
+        <a-asset-item id="model_frame_center" src="./model/frame-center.glb"></a-asset-item>
+
+        <a-asset-item id="model_cube_full" src="./model/cube-full.glb"></a-asset-item>
+
+        <a-mixin id="m_normal" scale="1 1 1"></a-mixin>
+        <a-mixin id="m_hand" gltf-model="#model_hand" animation-mixer="clip: Idole; loop: repeat" shadow="" visible="false"></a-mixin>
+        
+        <a-mixin id="m_cube" gltf-model="#model_cube_full" geometry="" animation-mixer=""></a-mixin>
+
+        <a-mixin id="m_f_e" gltf-model="#model_frame_edge"></a-mixin>
+        <a-mixin id="m_f_c" gltf-model="#model_frame_corner"></a-mixin>
       </a-assets>
 
-      <a-sky id="sky2" class="clickable sky" material="visible: false;"></a-sky>
-
+      <a-entity class="root" position="0 0 0" rotation="0 0 0" visible="false">
+        <a-entity class="frame"></a-entity>
+      </a-entity>
+       
       <a-entity id="camera-2">
         <a-camera 
           id="camera2-2"
           look-controls-enabled="false"
           wasd-controls-enabled="false"
-          _sync-user="pos: camera2; rot: camera; Npos: camera2; Nrot: camera"
           position="0 0 10"
           fov="60"
-          camera-view="Viewpoint: true; scene: scene2;
+          camera-view="Viewpoint: true; scene: scene-2;
             camera: camera-2; camera2: camera2-2"
           cube-rotate="ray: #view"
           color-set="ray: #view">
@@ -113,37 +141,50 @@
           </a-entity>
         </a-camera>
       </a-entity>
-      
-      <a-entity id="full_cube2" class="cube" gltf-model="#model_cube_full2"></a-entity>
     </div>
-    
-    <div id="main-display3" class="main-display display3">
+    <div id="main-display" class="main-display display-3">
       <a-scene 
-        id="scene3"
+        id="scene-3"
         loading-screen="enabled: false"
         renderer="sortObjects: true"
         xr-mode-ui="enabled: false"
         keyboard-shortcuts="enterVR: false; exitVR: false"
         device-orientation-permission-ui="enabled: false"
         embedded 
-        press-key-board cube-mode model-load
+        press-key-board cube-mode
+        model-load = "modelType: 2"
       >
+
       <a-assets>
-        <a-asset-item id="model_hand3"   src="./model/sub-hand.glb"></a-asset-item>
-        <a-asset-item id="model_cube_full3" src="./cube-full.glb"></a-asset-item>
+        <a-asset-item id="model_hand" src="./model/sub-hand.glb"></a-asset-item>
+
+        <a-asset-item id="model_frame_edge" src="./model/frame-edge.glb"></a-asset-item>
+        <a-asset-item id="model_frame_corner" src="./model/frame-corner.glb"></a-asset-item>
+        <a-asset-item id="model_frame_center" src="./model/frame-center.glb"></a-asset-item>
+
+        <a-asset-item id="model_cube_full" src="./model/cube-full.glb"></a-asset-item>
+
+        <a-mixin id="m_normal" scale="1 1 1"></a-mixin>
+        <a-mixin id="m_hand" gltf-model="#model_hand" animation-mixer="clip: Idole; loop: repeat" shadow="" visible="false"></a-mixin>
+        
+        <a-mixin id="m_cube" gltf-model="#model_cube_full" geometry="" animation-mixer=""></a-mixin>
+
+        <a-mixin id="m_f_e" gltf-model="#model_frame_edge"></a-mixin>
+        <a-mixin id="m_f_c" gltf-model="#model_frame_corner"></a-mixin>
       </a-assets>
 
-      <a-sky id="sky3" class="clickable sky" material="visible: false;"></a-sky>
-
+      <a-entity class="root" position="0 0 0" rotation="0 0 0" visible="false">
+        <a-entity class="frame"></a-entity>
+      </a-entity>
+       
       <a-entity id="camera-3">
         <a-camera 
           id="camera2-3"
           look-controls-enabled="false"
           wasd-controls-enabled="false"
-          _sync-user="pos: camera3; rot: camera; Npos: camera3; Nrot: camera"
           position="0 0 10"
           fov="60"
-          camera-view="Viewpoint: true; scene: scene3;
+          camera-view="Viewpoint: true; scene: scene-3;
             camera: camera-3; camera2: camera2-3"
           cube-rotate="ray: #view"
           color-set="ray: #view">
@@ -154,37 +195,50 @@
           </a-entity>
         </a-camera>
       </a-entity>
-      
-      <a-entity id="full_cube3" class="cube" gltf-model="#model_cube_full3"></a-entity>
     </div>
-    
-    <div id="main-display4" class="main-display display4">
+    <div id="main-display" class="main-display display-4">
       <a-scene 
-        id="scene4"
+        id="scene-4"
         loading-screen="enabled: false"
         renderer="sortObjects: true"
         xr-mode-ui="enabled: false"
         keyboard-shortcuts="enterVR: false; exitVR: false"
         device-orientation-permission-ui="enabled: false"
         embedded 
-        press-key-board cube-mode model-load
+        press-key-board cube-mode
+        model-load = "modelType: 3"
       >
+
       <a-assets>
-        <a-asset-item id="model_hand4"   src="./model/sub-hand.glb"></a-asset-item>
-        <a-asset-item id="model_cube_full4" src="./cube-full.glb"></a-asset-item>
+        <a-asset-item id="model_hand" src="./model/sub-hand.glb"></a-asset-item>
+
+        <a-asset-item id="model_frame_edge" src="./model/frame-edge.glb"></a-asset-item>
+        <a-asset-item id="model_frame_corner" src="./model/frame-corner.glb"></a-asset-item>
+        <a-asset-item id="model_frame_center" src="./model/frame-center.glb"></a-asset-item>
+
+        <a-asset-item id="model_cube_full" src="./model/cube-full.glb"></a-asset-item>
+
+        <a-mixin id="m_normal" scale="1 1 1"></a-mixin>
+        <a-mixin id="m_hand" gltf-model="#model_hand" animation-mixer="clip: Idole; loop: repeat" shadow="" visible="false"></a-mixin>
+        
+        <a-mixin id="m_cube" gltf-model="#model_cube_full" geometry="" animation-mixer=""></a-mixin>
+
+        <a-mixin id="m_f_e" gltf-model="#model_frame_edge"></a-mixin>
+        <a-mixin id="m_f_c" gltf-model="#model_frame_corner"></a-mixin>
       </a-assets>
 
-      <a-sky id="sky4" class="clickable sky" material="visible: false;"></a-sky>
-
+      <a-entity class="root" position="0 0 0" rotation="0 0 0" visible="false">
+        <a-entity class="frame"></a-entity>
+      </a-entity>
+       
       <a-entity id="camera-4">
         <a-camera 
           id="camera2-4"
           look-controls-enabled="false"
           wasd-controls-enabled="false"
-          _sync-user="pos: camera4; rot: camera; Npos: camera4; Nrot: camera"
           position="0 0 10"
           fov="60"
-          camera-view="Viewpoint: true; scene: scene4;
+          camera-view="Viewpoint: true; scene: scene-4;
             camera: camera-4; camera2: camera2-4"
           cube-rotate="ray: #view"
           color-set="ray: #view">
@@ -195,10 +249,7 @@
           </a-entity>
         </a-camera>
       </a-entity>
-      
-      <a-entity id="full_cube4" class="cube" gltf-model="#model_cube_full4"></a-entity>
     </div>
-    
   </body >
 </html>
 

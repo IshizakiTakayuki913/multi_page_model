@@ -16,14 +16,14 @@ const camera = () => ({
 		this.touchPress = false
 		this.touchMode = undefined
 
-		console.log(`カメラ　ーーーー`)
+		// console.log(`カメラ　ーーーー`)
 
 		this.scene = document.getElementById(this.data.scene)
-		console.log(this.scene)
+		// console.log(this.scene)
 		// this.setpos = this.scene.getBounndingClientRect()
 
 		this.scene.addEventListener('mousedown', (e) => {
-			console.log(`カメラ　ーーーー　mousedown　0`)
+			// console.log(`カメラ　ーーーー　mousedown　0`)
 			if(!this.data.Viewpoint) return
 			// console.log(`カメラ　ーーーー　mousedown　1`)
 			if(e.target.tagName !== 'CANVAS') return
@@ -32,7 +32,7 @@ const camera = () => ({
 				x:e.clientX - this.scene.getBoundingClientRect().left,
 				y:e.clientY - this.scene.getBoundingClientRect().top
 			})) return
-			console.log(`カメラ　ーーーー　mousedown　3`)
+			// console.log(`カメラ　ーーーー　mousedown　3`)
 			this.mousePress = true
 			
 			if(this.touchPress || this.touchMode !== undefined){
@@ -147,7 +147,7 @@ const camera = () => ({
 	},
 	
 	hit(p) {
-		console.log(p)
+		// console.log(p)
 		const raycaster = new THREE.Raycaster();
 		const pointer = new THREE.Vector2();
 		pointer.x = ( p.x / this.scene.clientWidth ) * 2 - 1;
