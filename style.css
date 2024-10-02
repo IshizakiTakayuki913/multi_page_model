@@ -10,14 +10,19 @@
 }
 
 body {
-	background-color: #de1212;
+	/* background-color: #de1212; */
 	margin: unset;
 	position: absolute;
 	width: 100%;
 	height: 100%;
 }
 
+.back {
+	background-color: #de1212;
+}
+
 .main-display {
+	border: unset;
 	position: absolute;
 	height: 50%;
 	width: 50%;

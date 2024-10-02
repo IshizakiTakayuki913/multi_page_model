@@ -5,6 +5,7 @@ const modelLoad = () => ({
   init(){
     const scene = this.el
     const root = this.el.querySelector(".root")
+    this.load_end = true
 
     console.log({scene, root})
 
@@ -42,13 +43,22 @@ const modelLoad = () => ({
     const Lhand = document.createElement('a-entity')
     const Rhand = document.createElement('a-entity')
     Lhand.id="L-hand"
-    Lhand.setAttribute("mixin","m_hand")
+    // Lhand.removeAttribute("gltf-model")
+    Lhand.setAttribute("gltf-model","url(./model/sub-hand.glb)")
+    // Lhand.setAttribute("mixin","m_hand")
+    Lhand.setAttribute("animation-mixer", {
+      clip: "Idole", loop: "repeat"})
+    // Lhand.setAttribute("visible", false)
     Lhand.setAttribute("rotation","0 -90 0")
     Lhand.setAttribute("scale","2.2 2.2 2.2")
     Lhand.setAttribute("shadow")
 
     Rhand.id="R-hand"
-    Rhand.setAttribute("mixin","m_hand")
+    Rhand.setAttribute("gltf-model","url(./model/sub-hand.glb)")
+    // Rhand.setAttribute("mixin","m_hand")
+    Rhand.setAttribute("animation-mixer", {
+      clip: "Idole", loop: "repeat"})
+    // Rhand.setAttribute("visible", false)
     Rhand.setAttribute("rotation","0 90 0")
     Rhand.setAttribute("scale","-2.2 2.2 2.2")
     Rhand.setAttribute("shadow")
@@ -118,7 +128,9 @@ const modelLoad = () => ({
     frame_corner.id="frame_corner"
     frame_corner.object3D.visible = false
     const f_c_in = document.createElement('a-entity')
-    f_c_in.setAttribute("mixin","m_f_c")
+    
+    f_c_in.setAttribute("gltf-model","url(./model/frame-corner.glb)")
+    // f_c_in.setAttribute("mixin","m_f_c")
     frame_corner.appendChild(f_c_in)
     frame.appendChild(frame_corner)
 
@@ -154,7 +166,9 @@ const modelLoad = () => ({
     frame_edge.id="frame_edge"
     frame_edge.object3D.visible = false
     const f_e_in = document.createElement('a-entity')
-    f_e_in.setAttribute("mixin","m_f_e")
+    f_e_in.setAttribute("gltf-model","url(./model/frame-edge.glb)")
+    // f_e_in.setAttribute("mixin","m_f_e")
+
     frame_edge.appendChild(f_e_in)
     frame.appendChild(frame_edge)
 
@@ -188,9 +202,12 @@ const modelLoad = () => ({
 
     const model_cube = document.createElement('a-entity')
     model_cube.id="cube"
+    model_cube.setAttribute("gltf-model","url(./model/cube-full.glb)")
+    // model_cube.setAttribute("gltf-model","#model_cube_full")
+    // model_cube.setAttribute("mixin","m_cube")
     model_cube.classList.add("clickable","cube")
     model_cube.setAttribute("shadow")
-    model_cube.setAttribute("mixin","m_cube")
+    full_cube = model_cube
 
     // setTimeout((e) => {
       root.prepend(model_cube)
@@ -202,7 +219,7 @@ const modelLoad = () => ({
     
     model_cube.addEventListener("model-loaded", (e) => {
       // console"model_cube model-loaded")
-      a=model_cube.object3D.children[0].children[0].children[0].children
+      const a=model_cube.object3D.children[0].children[0].children[0].children
       b = a.map((x) => x.children[0])
       for(let i=0;i<b.length;i++){
         t=b[i].userData.name[0]
@@ -210,7 +227,6 @@ const modelLoad = () => ({
         str[t][parseInt(num)] = b[i]
         str2[t][parseInt(num)] = b[i].parent
       }
-      full_cube = model_cube
 
       model_centers = str.n
       model_corners = str.c
@@ -228,22 +244,28 @@ const modelLoad = () => ({
       root.object3D.visible = true
     })
 
-
     this.el.addEventListener("load-all-end",(e) => {
       this.loaded_count ++
       if(this.loaded_count < 4) return
       
-      // console.log(" モデルが全て呼び込まれたよー")
-      const modelType = this.data.modelType
-      console.log(`modelType [${this.data.modelType}] Type [${typeof this.data.modelType}]`)
-      timeList[this.data.modelType] = new motionList(
+      console.log(" モデルが全て呼び込まれたよー")
+      // const modelType = this.data.modelType
+      // console.log(`modelType [${this.data.modelType}] Type [${typeof this.data.modelType}]`)
+      timeList = new motionList(
         full_cube, model_centers, model_corners, model_edges,
         bone_centers, bone_corners, bone_edges,
         L_hand, R_hand,
         bone_L_hand, bone_R_hand, 
         bone_name_model, frameObj
       )
-      timeList[this.data.modelType].color_set(scrambled_state, [0,1,2,3,4,5])
+      timeList.color_set(scrambled_state, [0,1,2,3,4,5])
+      // console.log(this)
+      this.load_end = false
     })
+  },
+  timeLise_push(){
+    if(this.load_end) return undefined
+
+    return timeList
   },
 })

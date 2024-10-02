@@ -7,11 +7,12 @@
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
 
-    <script src="./camera.js"></script>
-    <script src="./syncuser.js"></script>
+    <!-- <script src="./camera.js"></script> -->
+    <!-- <script src="./syncuser.js"></script> -->
     <script src="./solve.js"></script>
-    <script src="./modelLoad.js"></script>
-    <script src="./motionList.js"></script>
+    <script src="./iframe_display.js"></script>
+    <!-- <script src="./modelLoad.js"></script> -->
+    <!-- <script src="./motionList.js"></script> -->
     <!-- <script src="./solve2.js"></script>
     <script src="./cubeTouch.js"></script>
     <script src="./cubemrotate.js"></script>
@@ -22,19 +23,47 @@
   </head>
 
   <script type="text/javascript">
-    AFRAME.registerComponent('camera-view', camera())
-    AFRAME.registerComponent('sync-user', syncuser())
-    AFRAME.registerComponent('model-load',modelLoad())
+    // AFRAME.registerComponent('camera-view', camera())
+    // AFRAME.registerComponent('sync-user', syncuser())
+    // AFRAME.registerComponent('model-load',modelLoad())
     // AFRAME.registerComponent('press-key-board', presskeyboard())
     // AFRAME.registerComponent('cube-rotate', cubemrotate())
     // AFRAME.registerComponent('cube-mode', cubemode())
     // AFRAME.registerComponent('color-set', colorinput())
 
-    let count = 0
   </script>
 
-  <body oncontextmenu="return false;" >
-    <div id="main-display" class="main-display display-1">
+  <body class="back" oncontextmenu="return false;" ></body>
+    <iframe fra="iframe" class="main-display display-1" src="./index2.html" ></iframe>
+    <iframe fra="iframe" class="main-display display-2" src="./index2.html" ></iframe>
+    <iframe fra="iframe" class="main-display display-3" src="./index2.html" ></iframe>
+    <iframe fra="iframe" class="main-display display-4" src="./index2.html" ></iframe>
+  </body >
+</html>
+
+<!-- width="5" height="50vmin"   -->
+
+    
+    
+    <!-- <a-assets>
+      <a-asset-item id="model_hand" src="./model/sub-hand.glb"></a-asset-item>
+
+      <a-asset-item id="model_frame_edge" src="./model/frame-edge.glb"></a-asset-item>
+      <a-asset-item id="model_frame_corner" src="./model/frame-corner.glb"></a-asset-item>
+      <a-asset-item id="model_frame_center" src="./model/frame-center.glb"></a-asset-item>
+
+      <a-asset-item id="model_cube_full" src="./model/cube-full.glb"></a-asset-item>
+
+      <a-mixin id="m_normal" scale="1 1 1"></a-mixin>
+      <a-mixin id="m_hand" gltf-model="#model_hand" animation-mixer="clip: Idole; loop: repeat" shadow="" _visible="false"></a-mixin>
+      
+      <a-mixin id="m_cube" gltf-model="#model_cube_full" geometry="" animation-mixer=""></a-mixin>
+
+      <a-mixin id="m_f_e" gltf-model="#model_frame_edge"></a-mixin>
+      <a-mixin id="m_f_c" gltf-model="#model_frame_corner"></a-mixin>
+    </a-assets>
+
+    <div class="main-display display-1">
       <a-scene 
         id="scene-1"
         loading-screen="enabled: false"
@@ -44,7 +73,7 @@
         device-orientation-permission-ui="enabled: false"
         embedded 
         press-key-board cube-mode
-        model-load = "modelType: 0"
+         model-load = "modelType: 0"
       >
 
       <a-assets>
@@ -57,7 +86,7 @@
         <a-asset-item id="model_cube_full" src="./model/cube-full.glb"></a-asset-item>
 
         <a-mixin id="m_normal" scale="1 1 1"></a-mixin>
-        <a-mixin id="m_hand" gltf-model="#model_hand" animation-mixer="clip: Idole; loop: repeat" shadow="" _visible="false"></a-mixin>
+        <a-mixin id="m_hand" gltf-model="#model_hand" animation-mixer="clip: Idole; loop: repeat" shadow="" visible="false"></a-mixin>
         
         <a-mixin id="m_cube" gltf-model="#model_cube_full" geometry="" animation-mixer=""></a-mixin>
 
@@ -68,27 +97,30 @@
       <a-entity class="root" position="0 0 0" rotation="0 0 0" visible="false">
         <a-entity class="frame"></a-entity>
       </a-entity>
+
+      <a-box></a-box>
        
-      <a-entity id="camera-1">
+      <a-entity id="camOut_1">
         <a-camera 
-          id="camera2-1"
+          id="camIn_1"
           look-controls-enabled="false"
           wasd-controls-enabled="false"
           position="0 0 10"
           fov="60"
           camera-view="Viewpoint: true; scene: scene-1;
-            camera: camera-1; camera2: camera2-1"
-          cube-rotate="ray: #view"
-          color-set="ray: #view">
+            camOut: camOut_1; camIn: camIn_1"
+          cube-rotate="ray: #view_1"
+          color-set="ray: #view_1">
           <a-entity
-            id="view"
+            id="view_1"
             cursor="rayOrigin: mouse;"
             raycaster="objects: .clickable; direction:0 0 -1">
           </a-entity>
         </a-camera>
       </a-entity>
     </div>
-    <div id="main-display" class="main-display display-2">
+
+    <div class="main-display display-2">
       <a-scene 
         id="scene-2"
         loading-screen="enabled: false"
@@ -98,7 +130,7 @@
         device-orientation-permission-ui="enabled: false"
         embedded 
         press-key-board cube-mode
-        model-load = "modelType: 1"
+         model-load = "modelType: 1"
       >
 
       <a-assets>
@@ -122,27 +154,30 @@
       <a-entity class="root" position="0 0 0" rotation="0 0 0" visible="false">
         <a-entity class="frame"></a-entity>
       </a-entity>
+
+      <a-box></a-box>
        
-      <a-entity id="camera-2">
+      <a-entity id="camOut_2">
         <a-camera 
-          id="camera2-2"
+          id="camIn_2"
           look-controls-enabled="false"
           wasd-controls-enabled="false"
           position="0 0 10"
           fov="60"
           camera-view="Viewpoint: true; scene: scene-2;
-            camera: camera-2; camera2: camera2-2"
-          cube-rotate="ray: #view"
-          color-set="ray: #view">
+            camOut: camOut_2; camIn: camIn_2"
+          cube-rotate="ray: #view_2"
+          color-set="ray: #view_2">
           <a-entity
-            id="view"
+            id="view_2"
             cursor="rayOrigin: mouse;"
             raycaster="objects: .clickable; direction:0 0 -1">
           </a-entity>
         </a-camera>
       </a-entity>
     </div>
-    <div id="main-display" class="main-display display-3">
+
+    <div class="main-display display-3">
       <a-scene 
         id="scene-3"
         loading-screen="enabled: false"
@@ -152,7 +187,7 @@
         device-orientation-permission-ui="enabled: false"
         embedded 
         press-key-board cube-mode
-        model-load = "modelType: 2"
+         model-load = "modelType: 2"
       >
 
       <a-assets>
@@ -176,27 +211,30 @@
       <a-entity class="root" position="0 0 0" rotation="0 0 0" visible="false">
         <a-entity class="frame"></a-entity>
       </a-entity>
+      
+      <a-box></a-box>
        
-      <a-entity id="camera-3">
+      <a-entity id="camOut_3">
         <a-camera 
-          id="camera2-3"
+          id="camIn_3"
           look-controls-enabled="false"
           wasd-controls-enabled="false"
           position="0 0 10"
           fov="60"
           camera-view="Viewpoint: true; scene: scene-3;
-            camera: camera-3; camera2: camera2-3"
-          cube-rotate="ray: #view"
-          color-set="ray: #view">
+            camOut: camOut_3; camIn: camIn_3"
+          cube-rotate="ray: #view_3"
+          color-set="ray: #view_3">
           <a-entity
-            id="view"
+            id="view_3"
             cursor="rayOrigin: mouse;"
             raycaster="objects: .clickable; direction:0 0 -1">
           </a-entity>
         </a-camera>
       </a-entity>
     </div>
-    <div id="main-display" class="main-display display-4">
+
+    <div class="main-display display-4">
       <a-scene 
         id="scene-4"
         loading-screen="enabled: false"
@@ -206,7 +244,7 @@
         device-orientation-permission-ui="enabled: false"
         embedded 
         press-key-board cube-mode
-        model-load = "modelType: 3"
+         model-load = "modelType: 3"
       >
 
       <a-assets>
@@ -230,29 +268,25 @@
       <a-entity class="root" position="0 0 0" rotation="0 0 0" visible="false">
         <a-entity class="frame"></a-entity>
       </a-entity>
+      
+      <a-box></a-box>
        
-      <a-entity id="camera-4">
+      <a-entity id="camOut_4">
         <a-camera 
-          id="camera2-4"
+          id="camIn_4"
           look-controls-enabled="false"
           wasd-controls-enabled="false"
           position="0 0 10"
           fov="60"
           camera-view="Viewpoint: true; scene: scene-4;
-            camera: camera-4; camera2: camera2-4"
-          cube-rotate="ray: #view"
-          color-set="ray: #view">
+            camOut: camOut_4; camIn: camIn_4"
+          cube-rotate="ray: #view_4"
+          color-set="ray: #view_4">
           <a-entity
-            id="view"
+            id="view_4"
             cursor="rayOrigin: mouse;"
             raycaster="objects: .clickable; direction:0 0 -1">
           </a-entity>
         </a-camera>
       </a-entity>
-    </div>
-  </body >
-</html>
-
-
-    <!-- <iframe id="iframe" class="un-pointer-events" src="./index2.html" width="50vmin" height="50vmin"
-    ></iframe> -->
+    </div> -->
