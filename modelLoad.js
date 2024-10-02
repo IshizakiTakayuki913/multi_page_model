@@ -5,7 +5,6 @@ const modelLoad = () => ({
   init(){
     const scene = this.el
     const root = this.el.querySelector(".root")
-    this.load_end = true
 
     console.log({scene, root})
 
@@ -251,21 +250,16 @@ const modelLoad = () => ({
       console.log(" モデルが全て呼び込まれたよー")
       // const modelType = this.data.modelType
       // console.log(`modelType [${this.data.modelType}] Type [${typeof this.data.modelType}]`)
-      timeList = new motionList(
+
+      this.el.components["frame-cube"].modeleData(
         full_cube, model_centers, model_corners, model_edges,
         bone_centers, bone_corners, bone_edges,
         L_hand, R_hand,
         bone_L_hand, bone_R_hand, 
         bone_name_model, frameObj
       )
-      timeList.color_set(scrambled_state, [0,1,2,3,4,5])
+      
       // console.log(this)
-      this.load_end = false
     })
-  },
-  timeLise_push(){
-    if(this.load_end) return undefined
-
-    return timeList
   },
 })

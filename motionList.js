@@ -811,7 +811,6 @@ class motionList{
     if(this.stepAnimationEnd < 3) return
 
     // console.log(`ステップのアニメーションが全て終了`)
-
     // const mode  = document.getElementById("scene").components["cube-mode"]
     // mode.step_completion()
   }
